@@ -1,0 +1,40 @@
+openapi: "3.1.0"
+info:
+  title: "ChatGPT-Anki Connect Integration"
+  description: "This API enables ChatGPT to interact with Anki through Anki Connect."
+  version: "1.0.0"
+servers:
+  - url: "https://grumpy-eggs-arrive.loca.lt"
+paths:
+  /ankiAction:
+    post:
+      description: "Send a request to Anki Connect"
+      operationId: "ankiAction"
+      requestBody:
+        description: "Request body for Anki Connect"
+        required: true
+        content:
+          application/json:
+            schema:
+              type: "object"
+              properties:
+                action:
+                  type: "string"
+                  example: "deckNames"
+                params:
+                  type: "object"
+                version:
+                  type: "integer"
+                  example: 6
+      responses:
+        "200":
+          description: "Response from Anki Connect"
+          content:
+            application/json:
+              schema:
+                type: "object"
+                properties:
+                  result:
+                    type: "object"
+                  error:
+                    type: "null"
