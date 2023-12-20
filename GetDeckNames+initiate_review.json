@@ -1,0 +1,123 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "ChatGPT-Anki Connect Integration",
+    "description": "This API enables ChatGPT to interact with Anki through Anki Connect.",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://afraid-terms-agree.loca.lt"
+    }
+  ],
+  "paths": {
+    "/": {
+      "post": {
+        "description": "Interact with Anki Connect",
+        "operationId": "GetDeckNames",
+        "requestBody": {
+          "description": "Request to Anki Connect",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "action": {
+                    "type": "string",
+                    "example": "deckNames"
+                  },
+                  "version": {
+                    "type": "integer",
+                    "example": 6
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Response from Anki Connect",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "error": {
+                      "type": "null"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/guiDeckReview": {
+      "post": {
+        "description": "Start review for a specific deck in Anki",
+        "operationId": "StartGuiDeckReview",
+        "requestBody": {
+          "description": "Request to start deck review in Anki",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "action": {
+                    "type": "string",
+                    "example": "guiDeckReview"
+                  },
+                  "version": {
+                    "type": "integer",
+                    "example": 6
+                  },
+                  "params": {
+                    "type": "object",
+                    "properties": {
+                      "name": {
+                        "type": "string",
+                        "description": "Name of the deck to review"
+                      }
+                    },
+                    "required": ["name"]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Response from Anki Connect indicating review initiation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "boolean",
+                      "description": "True if review started successfully"
+                    },
+                    "error": {
+                      "type": "null"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
