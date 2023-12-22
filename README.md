@@ -5,4 +5,4 @@ Actions and Prompts for AnkiGPT
 The GetDeckNames+Start Review session JSON is functional as an action to ChatGPT. 
 
 # Next Steps
-We need to implement more actions into ChatGPT for it to be able to show cards. 
+Prompt Engineering + making the lines of code on the current card json shorter
