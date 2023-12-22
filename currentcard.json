@@ -1,0 +1,140 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "ChatGPT-Anki Connect Integration",
+    "description": "This API enables ChatGPT to interact with Anki through Anki Connect.",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://ninety-lamps-smile.loca.lt"
+    }
+  ],
+  "paths": {
+    "/": {
+      "post": {
+        "description": "Interact with Anki Connect",
+        "operationId": "GetDeckNames",
+        "requestBody": {
+          "description": "Request to Anki Connect",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "action": {
+                    "type": "string",
+                    "example": "deckNames"
+                  },
+                  "version": {
+                    "type": "integer",
+                    "example": 6
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Response from Anki Connect",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "error": {
+                      "type": "null"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/guiCurrentCard": {
+      "post": {
+        "description": "Retrieve information about the current card in Anki review session",
+        "operationId": "guiCurrentCard",
+        "requestBody": {
+          "description": "Request to get the current card from Anki",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "action": {
+                    "type": "string",
+                    "example": "guiCurrentCard"
+                  },
+                  "version": {
+                    "type": "integer",
+                    "example": 6
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Response with information about the current card",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "object",
+                      "description": "Object containing details of the current card, including front and back content, deck name, and more.",
+                      "properties": {
+                        "answer": {"type": "string"},
+                        "question": {"type": "string"},
+                        "deckName": {"type": "string"},
+                        "modelName": {"type": "string"},
+                        "fieldOrder": {"type": "integer"},
+                        "fields": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "type": "object",
+                            "properties": {
+                              "value": {"type": "string"},
+                              "order": {"type": "integer"}
+                            }
+                          }
+                        },
+                        "template": {"type": "string"},
+                        "cardId": {"type": "integer"},
+                        "buttons": {
+                          "type": "array",
+                          "items": {"type": "integer"}
+                        },
+                        "nextReviews": {
+                          "type": "array",
+                          "items": {"type": "string"}
+                        }
+                      }
+                    },
+                    "error": {
+                      "type": "null"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
